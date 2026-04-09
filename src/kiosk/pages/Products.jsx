@@ -1,16 +1,20 @@
 import { useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import KioskHeader from "../components/KioskHeader";
 import ProductCard from "../components/ProductCard";
 import CartSidebar from "../components/CartSidebar";
 import { categories, products } from "../data/products";
 import { useCart } from "../context/CartContext";
-
+import useIdleReset from "../../shared/hooks/useIdleReset";
 export default function Products() {
   const { categoryId } = useParams();
   const { addToCart } = useCart();
 
   const currentCategory = categories.find((cat) => cat.id === categoryId);
+  useIdleReset({
+    timeout: 60000,
+    onIdle: () => Navigate("/kiosk"),
+  });
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => product.category === categoryId);

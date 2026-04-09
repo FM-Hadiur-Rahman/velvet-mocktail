@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import KioskHeader from "../components/KioskHeader";
 import { useCart } from "../context/CartContext";
-
+import useIdleReset from "../../shared/hooks/useIdleReset";
 export default function Cart() {
   const navigate = useNavigate();
   const {
@@ -12,6 +12,10 @@ export default function Cart() {
     subtotal,
     cartCount,
   } = useCart();
+  useIdleReset({
+    timeout: 60000,
+    onIdle: () => navigate("/kiosk"),
+  });
 
   return (
     <div className="min-h-screen bg-black text-white">

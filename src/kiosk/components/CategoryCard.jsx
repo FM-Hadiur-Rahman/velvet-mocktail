@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function CategoryCard({ category, onClick }) {
+export default function CategoryCard({ category, onClick, t }) {
   return (
     <motion.button
       onClick={onClick}
@@ -11,7 +11,7 @@ export default function CategoryCard({ category, onClick }) {
       <div className="absolute inset-0">
         <img
           src={category.image}
-          alt={category.name}
+          alt={t[category.nameKey]}
           className="h-full w-full object-cover opacity-60 transition duration-500 group-hover:scale-110 group-hover:opacity-75"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent" />
@@ -19,17 +19,19 @@ export default function CategoryCard({ category, onClick }) {
 
       <div className="relative flex min-h-[320px] flex-col justify-end p-6 md:min-h-[380px]">
         <p className="mb-2 text-sm uppercase tracking-[0.25em] text-pink-300">
-          Premium Selection
+          {t.categoryPremiumSelection}
         </p>
 
-        <h3 className="text-3xl font-bold md:text-4xl">{category.name}</h3>
+        <h3 className="text-3xl font-bold md:text-4xl">
+          {t[category.nameKey]}
+        </h3>
 
         <p className="mt-3 max-w-md text-base leading-7 text-white/75">
-          {category.description}
+          {t[category.descriptionKey]}
         </p>
 
         <div className="mt-6 inline-flex w-fit items-center rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-medium text-white transition group-hover:bg-white group-hover:text-black">
-          Explore
+          {t.categoryExplore}
         </div>
       </div>
     </motion.button>

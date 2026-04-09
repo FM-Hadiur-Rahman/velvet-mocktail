@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import KioskHeader from "../components/KioskHeader";
 import { useCart } from "../context/CartContext";
-
+import useIdleReset from "../../shared/hooks/useIdleReset";
 export default function Checkout() {
   const navigate = useNavigate();
   const { cartItems, subtotal, cartCount, placeOrder } = useCart();
