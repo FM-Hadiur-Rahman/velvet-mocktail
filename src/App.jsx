@@ -8,6 +8,7 @@ import Products from "./kiosk/pages/Products";
 import Cart from "./kiosk/pages/Cart";
 import Checkout from "./kiosk/pages/Checkout";
 import Success from "./kiosk/pages/Success";
+import Orders from "./admin/pages/Orders";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/kiosk/cart" element={<Cart />} />
         <Route path="/kiosk/checkout" element={<Checkout />} />
         <Route path="/kiosk/success" element={<Success />} />
+        <Route path="/admin/orders" element={<Orders />} />
       </Routes>
     </BrowserRouter>
   );
