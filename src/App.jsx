@@ -9,6 +9,8 @@ import Cart from "./kiosk/pages/Cart";
 import Checkout from "./kiosk/pages/Checkout";
 import Success from "./kiosk/pages/Success";
 import Orders from "./admin/pages/Orders";
+import Dashboard from "./admin/pages/Dashboard";
+import KitchenDisplay from "./admin/pages/KitchenDisplay";
 
 export default function App() {
   return (
@@ -24,6 +26,8 @@ export default function App() {
         <Route path="/kiosk/checkout" element={<Checkout />} />
         <Route path="/kiosk/success" element={<Success />} />
         <Route path="/admin/orders" element={<Orders />} />
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/kitchen" element={<KitchenDisplay />} />
       </Routes>
     </BrowserRouter>
   );

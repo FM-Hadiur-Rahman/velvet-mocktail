@@ -1,5 +1,17 @@
 import { useCart } from "../../kiosk/context/CartContext";
 
+function formatDateTime(dateString) {
+  if (!dateString) return "—";
+
+  return new Date(dateString).toLocaleString("en-DE", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 export default function Orders() {
   const { orders, clearOrders, updateOrderStatus } = useCart();
 
@@ -57,6 +69,28 @@ export default function Orders() {
                         </button>
                       ),
                     )}
+                  </div>
+                </div>
+
+                <div className="mt-6 grid gap-4 rounded-2xl border border-white/10 bg-black/20 p-4 md:grid-cols-2">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-white/45">
+                      Created
+                    </p>
+                    <p className="mt-2 text-sm text-white/80">
+                      {formatDateTime(order.createdAt)}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-white/45">
+                      Completed
+                    </p>
+                    <p className="mt-2 text-sm text-white/80">
+                      {order.completedAt
+                        ? formatDateTime(order.completedAt)
+                        : "Not completed yet"}
+                    </p>
                   </div>
                 </div>
 
