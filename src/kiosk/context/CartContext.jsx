@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-
+import { products as defaultProducts } from "../data/products";
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
@@ -17,7 +17,13 @@ export function CartProvider({ children }) {
     const saved = localStorage.getItem("kiosk_orders");
     return saved ? JSON.parse(saved) : [];
   });
-
+  const [products, setProducts] = useState(() => {
+    const saved = localStorage.getItem("kiosk_products");
+    return saved ? JSON.parse(saved) : defaultProducts;
+  });
+  useEffect(() => {
+    localStorage.setItem("kiosk_products", JSON.stringify(products));
+  }, [products]);
   useEffect(() => {
     localStorage.setItem("kiosk_cart", JSON.stringify(cartItems));
   }, [cartItems]);
@@ -45,7 +51,24 @@ export function CartProvider({ children }) {
       return [...prev, { ...product, quantity: 1 }];
     });
   };
+  const addProduct = (newProduct) => {
+    const product = {
+      ...newProduct,
+      id: Date.now(),
+    };
 
+    setProducts((prev) => [...prev, product]);
+  };
+  const updateProduct = (updatedProduct) => {
+    setProducts((prev) =>
+      prev.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product,
+      ),
+    );
+  };
+  const deleteProduct = (productId) => {
+    setProducts((prev) => prev.filter((product) => product.id !== productId));
+  };
   const removeFromCart = (productId) => {
     setCartItems((prev) => prev.filter((item) => item.id !== productId));
   };
@@ -148,6 +171,10 @@ export function CartProvider({ children }) {
     lastOrder,
     orders,
     updateOrderStatus,
+    products,
+    addProduct,
+    updateProduct,
+    deleteProduct,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

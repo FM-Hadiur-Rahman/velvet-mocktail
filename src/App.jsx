@@ -11,7 +11,7 @@ import Success from "./kiosk/pages/Success";
 import Orders from "./admin/pages/Orders";
 import Dashboard from "./admin/pages/Dashboard";
 import KitchenDisplay from "./admin/pages/KitchenDisplay";
-
+import ProductsAdmin from "./admin/pages/Products";
 export default function App() {
   return (
     <BrowserRouter>
@@ -28,6 +28,7 @@ export default function App() {
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/kitchen" element={<KitchenDisplay />} />
+        <Route path="/admin/products" element={<ProductsAdmin />} />
       </Routes>
     </BrowserRouter>
   );
